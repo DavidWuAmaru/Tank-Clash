@@ -6,7 +6,7 @@ public class tower : MonoBehaviour
 {
     private bool aim = false;
     private float move_center = 0.5f;
-    private int add_angle = 0;
+    private float add_angle = 0;
 
     AudioSource shootAudio;
     public GameObject missile;
@@ -59,11 +59,11 @@ public class tower : MonoBehaviour
             float move = mouse_position / screen_width;
             if(move > 0.9)
             {
-                add_angle += 1;
+                add_angle += 0.5f;
             }
             else if(move < 0.1)
             {
-                add_angle -= 1;
+                add_angle -= 0.5f;
             }
             float angle = -(move_center - move) * 100 + add_angle;
             tower_rotate(angle);

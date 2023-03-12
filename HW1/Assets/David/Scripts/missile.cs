@@ -39,7 +39,7 @@ public class missile : MonoBehaviour
         if (!already_boom)
         {
             already_boom = true;
-            GameObject.Find("boom").GetComponent<ParticleSystem>().Play();
+            transform.GetChild(1).GetComponent<ParticleSystem>().Play();
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             this.Invoke("destroy", 0.1f);
         }
