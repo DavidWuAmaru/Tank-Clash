@@ -8,19 +8,37 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float translateSpeed, rotationSpeed;
     private float angle = -20;
+    public bool first_person = false;
     public void focus()
     {
-        target = GameObject.Find("TankFree_Tower").transform;
-        offset = new Vector3(0, 2, -3);
-        angle = -20;
+        if (first_person)
+        {
+            target = GameObject.Find("TankFree_Tower").transform;
+            offset = new Vector3(0, 1, 0);
+            angle = 0;
+        }
+        else
+        {
+            target = GameObject.Find("TankFree_Tower").transform;
+            offset = new Vector3(0, 2, -3);
+            angle = -20;
+        }
     }
     public void unfocus()
     {
-        target = GameObject.Find("TankFree_Blue").transform;
-        offset = new Vector3(0, 2, -5);
-        angle = -10;
+        if (first_person)
+        {
+            target = GameObject.Find("TankFree_Blue").transform;
+            offset = new Vector3(0, 1, 0);
+            angle = 0;
+        }
+        else
+        {
+            target = GameObject.Find("TankFree_Blue").transform;
+            offset = new Vector3(0, 2, -5);
+            angle = -10;
+        }
     }
-
     void Update()
     {
         HandleRotation();

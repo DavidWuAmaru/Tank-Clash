@@ -10,6 +10,7 @@ public class tower : MonoBehaviour
 
     AudioSource shootAudio;
     public GameObject missile;
+    public GameObject plane;
     public Transform muzzleTransform;
 
     // Start is called before the first frame update
@@ -57,11 +58,11 @@ public class tower : MonoBehaviour
             float mouse_position = Input.mousePosition.x;
             float screen_width = Screen.width;
             float move = mouse_position / screen_width;
-            if(move > 0.9)
+            if (move > 0.9)
             {
                 add_angle += 0.5f;
             }
-            else if(move < 0.1)
+            else if (move < 0.1)
             {
                 add_angle -= 0.5f;
             }
@@ -78,6 +79,11 @@ public class tower : MonoBehaviour
                     shootAudio.Play();
                 }
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Q) && aim)
+        {
+            Vector3 offset = new Vector3(0, 5, 0);
+            Instantiate(plane, transform.position + offset, Quaternion.Euler(transform.eulerAngles));
         }
     }
 }
