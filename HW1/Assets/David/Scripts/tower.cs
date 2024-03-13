@@ -12,6 +12,8 @@ public class tower : MonoBehaviour
     public GameObject missile;
     public GameObject plane;
     public Transform muzzleTransform;
+    private GameObject camera;
+    private bool first_person = false;
 
     // Start is called before the first frame update
     private void tower_rotate(float angle)
@@ -20,16 +22,15 @@ public class tower : MonoBehaviour
     }
     private void focus()
     {
-        GameObject camera =  GameObject.Find("Main Camera");
         camera.GetComponent<CameraFollow>().focus();
     }
     private void unfocus()
     {
-        GameObject camera = GameObject.Find("Main Camera");
         camera.GetComponent<CameraFollow>().unfocus();
     }
     void Start()
     {
+        camera = GameObject.Find("Main Camera");
         shootAudio = GetComponent<AudioSource>();
     }
     // Update is called once per frame
@@ -84,6 +85,21 @@ public class tower : MonoBehaviour
         {
             Vector3 offset = new Vector3(0, 5, 0);
             Instantiate(plane, transform.position + offset, Quaternion.Euler(transform.eulerAngles));
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (!first_person)
+            {
+                first_person = true;
+                camera.GetComponent<CameraFollow>().first_person = true;
+                camera.GetComponent<CameraFollow>().unfocus();
+            }
+            else
+            {
+                first_person = false;
+                camera.GetComponent<CameraFollow>().first_person = false;
+                camera.GetComponent<CameraFollow>().unfocus();
+            }
         }
     }
 }
